@@ -1,11 +1,7 @@
-<script setup lang='ts'>
-import DeliveryListPage from './pages/DeliveryListPage.vue';
-</script>
+<script setup lang='ts'></script>
 
 <template>
-  <DeliveryListPage></DeliveryListPage>
+  <router-view></router-view>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
