@@ -1,6 +1,4 @@
-<script setup lang='ts'>
-
-</script>
+<script setup lang='ts'></script>
 
 <template>
   <h1>
@@ -10,6 +8,7 @@
 
 <style scoped>
 h1 {
-  font-size: 1.4em;
+  font-size: 1.5em;
+  font-weight: bold;
 }
 </style>

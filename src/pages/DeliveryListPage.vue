@@ -1,15 +1,99 @@
 <script setup lang='ts'>
-import Title from '../components/atoms/Title.vue';
+import { ListBulletIcon, UserIcon } from '@heroicons/vue/24/solid'
 </script>
 
 <template>
-  <Title clas="delivery-list-title">依頼リスト</Title>
+  <div class="delivery-list-page">
+    <header class="delivery-list-header">
+      <div class="delivery-list-header__title">
+        依頼リスト
+      </div>
+    </header>
+    <main class="delivery-list">
+      <div class="delivery-list">
+        <div class="delivery-list__no-item-msg">
+          依頼はありません
+        </div>
+        <!-- /.delivery-list__no-item-msg -->
+      </div>
+      <!-- /.delivery-list-content__list -->
+      <button class="delivery-list-content__order-btn bg-blue-500 hover:bg-blue-400">
+        配送を依頼する
+      </button>
+    </main>
+    <footer class="delivery-list-footer">
+      <label class="delivery-list-icon">
+        <ListBulletIcon class="delivery-list-icon__img h-6 w-6"></ListBulletIcon>
+        <div class="delivery-list-icon__label">
+          依頼リスト
+        </div>
+      </label>
+      <label class="account-icon">
+        <UserIcon class="account-icon__img h-6 w-6"></UserIcon>
+        <div class="account-icon__label">
+          アカウント
+        </div>
+      </label>
+    </footer>
+  </div>
+  <!-- /.delivery-list-page -->
 </template>
 
 <style scoped>
-.delivery-list-title {
-  position: absolute;
-  top: 0;
-  left: 100px;
+.delivery-list-header {
+  border-bottom: 1px solid gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.delivery-list-header__title {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.delivery-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.delivery-list {
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.delivery-list-content__order-btn {
+  width: 70%;
+  padding: 1em 0;
+  border-radius: 2em;
+  font-weight: bold;
+  margin: 0 0 0.5em 0;
+}
+.delivery-list-footer {
+  border-top: 1px solid gray;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.delivery-list-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.delivery-list-icon__label {
+  font-size: 0.9em;
+  flex-grow: 0.6;
+}
+.account-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.account-icon__label {
+  font-size: 0.9em;
+  flex-grow: 0.6;
 }
 </style>
