@@ -137,3 +137,6 @@ yarn-error.log
 # User Custom
 ## vscode
 .vscode/
+
+## env
+.env
