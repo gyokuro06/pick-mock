@@ -9,12 +9,12 @@ const onClickRegisterButton = () => router.push('/order')
 </script>
 
 <template>
-  <div class="register-pickup-location-detail-page">
-    <Header :showGoback="true" @goback="onGoback">集荷先を登録する</Header>
-    <main class="pickup-location-detail-input-form">
-      <div class="pickup-location">
-        <div class="pickup-location__title">集荷先</div>
-        <div class="pickup-location__address">東京都江戸川区北小岩２丁目１９−８</div>
+  <div class="register-delivery-dest-detail-page">
+    <Header :showGoback="true" @goback="onGoback">配送先を登録する</Header>
+    <main class="delivery-dest-detail-input-form">
+      <div class="delivery-dest">
+        <div class="delivery-dest__title">配送先</div>
+        <div class="delivery-dest__address">東京都江戸川区北小岩２丁目１９−８</div>
       </div>
       <div class="building-and-room">
         <div class="building-and-room__title">建物名・部屋番号</div>
@@ -27,7 +27,7 @@ const onClickRegisterButton = () => router.push('/order')
       <div class="contact-person-name">
         <div class="contact-person-name__title">
           <span class="contact-person-name__title--required border-red-500">必須</span>
-          集荷先担当者のお名前 (ひらがな)
+          配送先担当者のお名前 (ひらがな)
         </div>
         <input type="text" class="contact-person-name__address" placeholder="さかもと　りょうま" required>
       </div>
@@ -39,23 +39,23 @@ const onClickRegisterButton = () => router.push('/order')
         <input type="tel" class="tel__address" placeholder="09012345678 ハイフン(-)なし" required>
       </div>
     </main>
-    <footer class="register-pickup-location-detail-footer">
-      <div class="register-pickup-location-detail-footer__register-button-wrapper">
+    <footer class="register-delivery-dest-detail-footer">
+      <div class="register-delivery-dest-detail-footer__register-button-wrapper">
         <Button @click="onClickRegisterButton">登録する</Button>
       </div>
     </footer>
   </div>
-  <!-- /.register-pickup-location-detail-page -->
+  <!-- /.register-delivery-dest-detail-page -->
 </template>
 
 <style scoped>
-.pickup-location {
+.delivery-dest {
   text-align: left;
   line-height: 3em;
   margin: 0 0 1em;
   overflow-y: scroll;
 }
-.pickup-location__title {
+.delivery-dest__title {
   font-weight: bold;
 }
 .building-and-room {
@@ -126,13 +126,13 @@ const onClickRegisterButton = () => router.push('/order')
   padding: 0 0 0 0.5em;
   border-radius: 0.5em;
 }
-.register-pickup-location-detail-footer {
+.register-delivery-dest-detail-footer {
   border-top: 1px solid gray;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
-.register-pickup-location-detail-footer__register-button-wrapper {
+.register-delivery-dest-detail-footer__register-button-wrapper {
   width: 90%;
 }
 </style>

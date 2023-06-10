@@ -1,11 +1,14 @@
 <script setup lang='ts'>
 import { Ref, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { ChevronLeftIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
+import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { Loader } from '@googlemaps/js-api-loader';
+import Header from '../components/molecules/Header.vue';
+import Button from '../components/atoms/Button.vue';
 
 const router = useRouter()
-const onClickGoBackIcon = () => router.push('/order')
+const onGoback = () => router.push('/order')
+const onClickDetailLocationStepButton = () => router.push('/order/dest/detail')
 
 const googleMapLoader = new Loader({
   apiKey: import.meta.env.VITE_GOOGLE_MAP_API_KEY,
@@ -31,17 +34,12 @@ onMounted(() => {
     .catch((e) => console.error(e))
 })
 
+const onClickCurrentLocationButton = () => console.log("current location button clicked.")
 </script>
 
 <template>
   <div class="delivery-dest-selector-page">
-    <header class="delivery-dest-selector-header">
-      <ChevronLeftIcon class="go-back-icon__img h-6 w-6" @click="onClickGoBackIcon"></ChevronLeftIcon>
-      <div class="delivery-dest-selector-header__title">
-        配達先を指定
-      </div>
-      <!-- /.delivery-dest-selector-header__title -->
-    </header>
+    <Header :showGoback="true" @goback="onGoback">配達先を指定</Header>
     <main class="delivery-dest-selector">
       <div class="location-search-form">
         <input
@@ -56,8 +54,12 @@ onMounted(() => {
       <div class="location-select-map">
         <div ref='mapDiv' class="location-select-map__map"></div>
         <!-- /.location-select-map__map -->
-        <button class="location-select-map__current-location-btn bg-blue-500 hover:bg-blue-400">現在地</button>
-        <button class="location-select-map__detail-location-step-btn bg-blue-500 hover:bg-blue-400">次へ</button>
+        <div class="current-location-button-wrapper">
+          <Button @click="onClickCurrentLocationButton">現在地</Button>
+        </div>
+        <div class="detail-location-step-button-wrapper">
+          <Button @click="onClickDetailLocationStepButton">次へ</Button>
+        </div>
       </div>
       <!-- /.location-select-map -->
     </main>
@@ -66,16 +68,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.delivery-dest-selector-header {
-  border-bottom: 1px solid gray;
-  display: flex;
-  align-items: center;
-}
-.delivery-dest-selector-header__title {
-  flex-grow: 1;
-  font-weight: bold;
-  font-size: 1.1em;
-}
 .delivery-dest-selector {
   display: flex;
   flex-direction: column;
@@ -96,21 +88,18 @@ onMounted(() => {
   width: 100%;
   height: 100%;
 }
-.location-select-map__current-location-btn {
+.current-location-button-wrapper,
+.detail-location-step-button-wrapper {
   position: absolute;
   z-index: 1;
-  border-radius: 2em;
-  padding: 0.8em 1em;
+}
+.current-location-button-wrapper {
   top: 1em;
   right: 1em;
 }
-.location-select-map__detail-location-step-btn {
-  position: absolute;
-  z-index: 1;
+.detail-location-step-button-wrapper {
   bottom: 1em;
   left: 15%;
   width: 70%;
-  padding: 1em;
-  border-radius: 2em;
 }
 </style>

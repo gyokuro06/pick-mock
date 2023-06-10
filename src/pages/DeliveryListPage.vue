@@ -2,22 +2,18 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ListBulletIcon, UserIcon } from '@heroicons/vue/24/solid'
+import Header from '../components/molecules/Header.vue';
+import Button from '../components/atoms/Button.vue';
 
 const router = useRouter()
 const deliveryList = ref([])
 
-const onClickOrderButton = () => {
-  router.push('/order')
-}
+const onClickOrderButton = () => router.push('/order')
 </script>
 
 <template>
   <div class="delivery-list-page">
-    <header class="delivery-list-header">
-      <div class="delivery-list-header__title">
-        依頼リスト
-      </div>
-    </header>
+    <Header :showGoback="false">依頼リスト</Header>
     <main class="delivery-list">
       <div class="delivery-list">
         <div class="delivery-list__no-item-msg" v-if="deliveryList.length == 0">
@@ -30,9 +26,9 @@ const onClickOrderButton = () => {
         <!-- /.delivery-list__list -->
       </div>
       <!-- /.delivery-list-content__list -->
-      <button class="delivery-list-content__order-btn bg-blue-500 hover:bg-blue-400" @click="onClickOrderButton">
-        配送を依頼する
-      </button>
+      <div class="button-wrapper">
+        <Button @click="onClickOrderButton">配送を依頼する</Button>
+      </div>
     </main>
     <footer class="delivery-list-footer">
       <label class="delivery-list-icon">
@@ -53,16 +49,6 @@ const onClickOrderButton = () => {
 </template>
 
 <style scoped>
-.delivery-list-header {
-  border-bottom: 1px solid gray;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.delivery-list-header__title {
-  font-weight: bold;
-  font-size: 1.1em;
-}
 .delivery-list {
   display: flex;
   flex-direction: column;
@@ -76,11 +62,8 @@ const onClickOrderButton = () => {
   justify-content: center;
   align-items: center;
 }
-.delivery-list-content__order-btn {
+.button-wrapper {
   width: 70%;
-  padding: 1em 0;
-  border-radius: 2em;
-  font-weight: bold;
   margin: 0 0 0.5em 0;
 }
 .delivery-list-footer {
