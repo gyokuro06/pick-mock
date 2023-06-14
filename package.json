@@ -7,11 +7,12 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "tailwind": "tailwindcss -i ./src/style.css -o ./dist/output.css --watch"
+    "tailwind": "tailwindcss -i ./src/style.css -o ./public/output.css --watch"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.1",
     "@heroicons/vue": "^2.0.18",
+    "firebase": "^9.22.2",
     "vue": "^3.2.47",
     "vue-router": "^4.2.2"
   },

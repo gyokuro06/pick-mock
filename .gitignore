@@ -140,3 +140,9 @@ yarn-error.log
 
 ## env
 .env
+
+## firebase
+.firebase
+
+## tailwind
+public/
