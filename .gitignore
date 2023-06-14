@@ -145,4 +145,4 @@ yarn-error.log
 .firebase
 
 ## tailwind
-public/
+build.css
