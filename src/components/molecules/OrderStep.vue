@@ -10,7 +10,7 @@ defineEmits(['click'])
 </script>
 
 <template>
-  <div class="order-step border-blue-500">
+  <div class="order-step">
     <div class="order-step__label">
       <slot name="label"></slot>
     </div>
@@ -25,8 +25,7 @@ defineEmits(['click'])
 <style scoped>
 .order-step {
   padding: 1em 0.5em;
-  border-style: solid;
-  border-width: 4px;
+  border: 4px solid var(--blue-500);
   border-radius: 12px;
 }
 .order-step__label {

@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { Ref, ref, watchEffect, onMounted } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps({
   label: {
@@ -12,32 +12,23 @@ const props = defineProps({
   }
 })
 
-const iconImg: Ref<HTMLElement | undefined> = ref()
-const iconImgColorClass = ref('fill-white')
-const labelColorClass = ref('text-white')
 const onClick = () => {
-  console.log('icon clicked.')
+  console.log(`${props.label} icon clicked.`)
 }
-watchEffect(() => {
-  if (!iconImg.value) return;
-  iconImg.value
-    ?.getElementsByTagName('svg')[0]
-    .classList.add(iconImgColorClass.value)
-})
-onMounted(() => {
-  if (!props.active) return;
-  iconImgColorClass.value = 'fill-blue-500'
-  labelColorClass.value = 'text-blue-500'
-})
-
+const imgClass = computed(() => ({
+  'icon__img--active': props.active,
+}))
+const labelClass = computed(() => ({
+  'icon__label--active': props.active,
+}))
 </script>
 
 <template>
   <label class="icon" @click="onClick">
-    <div ref="iconImg" class="icon__img h-6 w-6">
+    <div :class="['icon__img', imgClass]">
       <slot></slot>
     </div>
-    <div :class="['icon__label', {'icon__label--active': active}, labelColorClass]">{{ label }}</div>
+    <div :class="['icon__label', labelClass]">{{ label }}</div>
   </label>
 </template>
 
@@ -49,11 +40,23 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
 }
+.icon__img {
+  height: var(--h-6);
+  width: var(--w-6);
+}
+.icon__img :slotted(svg) {
+  fill: var(--white);
+}
+.icon__img--active :slotted(svg) {
+  fill: var(--blue-500);
+}
 .icon__label {
   font-size: 0.9em;
   flex-grow: 0.6;
+  color: var(--white);
 }
 .icon__label--active {
   font-weight: bold;
+  color: var(--blue-500);
 }
 </style>

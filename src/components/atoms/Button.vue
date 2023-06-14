@@ -11,9 +11,7 @@ defineEmits(['click'])
 
 const buttonClass = computed(() => ({
   'button__btn--active': props.active,
-  'bg-blue-500': props.active,
-  'hover:bg-blue-400': props.active,
-  'bg-gray-500': !props.active
+  'button__btn--disable': !props.active,
 }))
 </script>
 
@@ -32,5 +30,14 @@ const buttonClass = computed(() => ({
   border-radius: 32px;
   font-weight: bold;
   margin: 0 auto;
+}
+.button__btn--disable {
+  background-color: var(--gray-500);
+}
+.button__btn--active {
+  background-color: var(--blue-500);
+}
+.button__btn--active:hover {
+  background-color: var(--blue-400);
 }
 </style>
