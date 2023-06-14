@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router';
 import { ListBulletIcon, UserIcon } from '@heroicons/vue/24/solid'
 import Header from '../components/molecules/Header.vue';
 import Button from '../components/atoms/Button.vue';
+import SvgIcon from '../components/atoms/SvgIcon.vue';
 
 const router = useRouter()
 const deliveryList = ref([])
@@ -31,18 +32,12 @@ const onClickOrderButton = () => router.push('/order')
       </div>
     </main>
     <footer class="delivery-list-footer">
-      <label class="delivery-list-icon">
-        <ListBulletIcon class="delivery-list-icon__img h-6 w-6 fill-blue-500"></ListBulletIcon>
-        <div class="delivery-list-icon__label text-blue-500">
-          依頼リスト
-        </div>
-      </label>
-      <label class="account-icon">
-        <UserIcon class="account-icon__img h-6 w-6"></UserIcon>
-        <div class="account-icon__label">
-          アカウント
-        </div>
-      </label>
+      <SvgIcon :label="'依頼リスト'" :active="true">
+          <ListBulletIcon class="delivery-list-icon__img"></ListBulletIcon>
+      </SvgIcon>
+      <SvgIcon :label="'アカウント'" :active="false">
+        <UserIcon class="account-icon__img"></UserIcon>
+      </SvgIcon>
     </footer>
   </div>
   <!-- /.delivery-list-page -->
@@ -71,26 +66,5 @@ const onClickOrderButton = () => router.push('/order')
   display: flex;
   justify-content: space-around;
   align-items: center;
-}
-.delivery-list-icon {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.delivery-list-icon__label {
-  font-size: 0.9em;
-  font-weight: bold;
-  flex-grow: 0.6;
-}
-.account-icon {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.account-icon__label {
-  font-size: 0.9em;
-  flex-grow: 0.6;
 }
 </style>
