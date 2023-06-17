@@ -2,11 +2,11 @@
 import { Ref, computed, onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
+import { Address } from '../../domain/address';
 import { getMap } from '../../driver/googleMapsApi';
+import { getAddressByQuery } from '../../gateway/addressGateway';
 import Header from '../molecules/Header.vue';
 import Button from '../atoms/Button.vue';
-import { Address } from '../../domain/address';
-import { getAddressByQuery } from '../../gateway/addressGateway';
 
 const router = useRouter()
 const onGoback = () => router.push('/order')
