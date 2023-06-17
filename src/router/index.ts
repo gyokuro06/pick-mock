@@ -5,6 +5,7 @@ import PickupLocationSelectorPageVue from "../pages/PickupLocationSelectorPage.v
 import DeliveryDestSelectorPageVue from "../pages/DeliveryDestSelectorPage.vue";
 import RegisterPickupLocationDetailPageVue from "../pages/RegisterPickupLocationDetailPage.vue";
 import RegisterDeliveryDestDetailPageVue from "../pages/RegisterDeliveryDestDetailPage.vue";
+import RefrigeratorCarTypePickPageVue from "../pages/RefrigeratorCarTypePickPage.vue";
 
 const routes = [
     {
@@ -16,6 +17,11 @@ const routes = [
         path: "/order",
         name: "OrderDelivery",
         component: DeliveryOrderPageVue,
+    },
+    {
+        path: "/order/car",
+        name: "RefrigeratorCarTypePick",
+        component: RefrigeratorCarTypePickPageVue
     },
     {
         path: "/order/pickup",
