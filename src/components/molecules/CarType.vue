@@ -33,6 +33,8 @@ const props = defineProps({
   }
 })
 
+defineEmits(['click'])
+
 const perTimeString = computed(() => {
   if (props.perMinTime < 60) return `${props.perMinTime}分`
   const hourTime = props.perMinTime / 60
@@ -44,7 +46,7 @@ const perTimeString = computed(() => {
 </script>
 
 <template>
-  <div class="car-type">
+  <div class="car-type" @click="$emit('click')">
     <div class="car-type-description">
       <TrackIcon class="car-type-description__icon" alt="track" />
       <div class="car-type-description__name-speed-wrapper">
@@ -82,6 +84,10 @@ const perTimeString = computed(() => {
   border: 4px solid var(--blue-500);
   border-radius: 12px;
   padding: 1rem;
+  cursor: pointer;
+}
+.car-type:hover {
+  border-color: var(--blue-400);
 }
 .car-type-description {
   margin: 0 0 1rem 0;

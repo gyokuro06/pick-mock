@@ -5,6 +5,7 @@ import CarType from '../molecules/CarType.vue';
 
 const router = useRouter()
 const onGoback = () => router.push('/order')
+const onClickCarType = () => router.push('/order')
 </script>
 
 <template>
@@ -19,6 +20,7 @@ const onGoback = () => router.push('/order')
         :account="8190"
         :perDistance="22.0"
         :perMinTime="51"
+        @click="onClickCarType"
         ></CarType>
     </div>
     <!-- /.refrigerator-car-type-pick__light-car-wrapper -->
@@ -31,6 +33,7 @@ const onGoback = () => router.push('/order')
         :account="8190"
         :perDistance="22.0"
         :perMinTime="51"
+        @click="onClickCarType"
         ></CarType>
     </div>
     <!-- /.refrigerator-car-type-pick__light-car-wrapper -->
@@ -43,6 +46,7 @@ const onGoback = () => router.push('/order')
         :account="8190"
         :perDistance="22.0"
         :perMinTime="51"
+        @click="onClickCarType"
         ></CarType>
     </div>
     <!-- /.refrigerator-car-type-pick__light-car-wrapper -->
@@ -51,6 +55,6 @@ const onGoback = () => router.push('/order')
 
 <style scoped>
 .refrigerator-car-type-pick__light-car-wrapper {
-  margin: 1rem 0 0 0;
+  margin: 1rem 3rem;
 }
 </style>
