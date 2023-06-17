@@ -14,7 +14,7 @@ defineEmits(['goback'])
 <template>
   <header class="header">
     <ChevronLeftIcon
-      class="header__go-back h-6 w-6 border-gray-500"
+      class="header__go-back"
       @click="$emit('goback')"
       v-if="showGoback">
     </ChevronLeftIcon>
@@ -34,6 +34,8 @@ defineEmits(['goback'])
 }
 .header__go-back {
   cursor: pointer;
+  width: var(--w-1);
+  height: var(--h-1);
 }
 .header__title {
   flex-grow: 1;

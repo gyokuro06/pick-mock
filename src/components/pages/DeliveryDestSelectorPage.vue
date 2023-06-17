@@ -2,7 +2,7 @@
 import { Ref, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
-import { getMap } from '../../driver/GoogleMapsApi';
+import { getMap } from '../../driver/googleMapsApi';
 import Header from '../molecules/Header.vue';
 import Button from '../atoms/Button.vue';
 
