@@ -2,45 +2,26 @@
 import { Ref, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
-import { Loader } from '@googlemaps/js-api-loader';
-import Header from '../components/molecules/Header.vue';
-import Button from '../components/atoms/Button.vue';
+import { getMap } from '../../driver/GoogleMapsApi';
+import Header from '../molecules/Header.vue';
+import Button from '../atoms/Button.vue';
 
 const router = useRouter()
 const onGoback = () => router.push('/order')
-const onClickDetailLocationStepButton = () => router.push('/order/dest/detail')
-
-const googleMapLoader = new Loader({
-  apiKey: import.meta.env.VITE_GOOGLE_MAP_API_KEY,
-  version: 'weekly',
-  libraries: [],
-  language: 'ja'
-})
-const googleMapOptions = {
-  center: {
-    lat: 35.6682156,
-    lng: 139.6584685,
-  },
-  zoom: 10
-}
+const onClickDetailLocationStepButton = () => router.push('/order/pickup/detail')
 
 const mapDiv: Ref<HTMLElement | undefined> = ref()
 onMounted(() => {
-  googleMapLoader
-    .importLibrary('maps')
-    .then(({Map}) => {
-      new Map(mapDiv.value!, googleMapOptions)
-    })
-    .catch((e) => console.error(e))
+  getMap(mapDiv.value!)
 })
 
 const onClickCurrentLocationButton = () => console.log("current location button clicked.")
 </script>
 
 <template>
-  <div class="delivery-dest-selector-page">
-    <Header :showGoback="true" @goback="onGoback">配達先を指定</Header>
-    <main class="delivery-dest-selector">
+  <div class="pickup-location-selector-page">
+    <Header :showGoback="true" @goback="onGoback">集荷先を指定</Header>
+    <main class="pickup-location-selector">
       <div class="location-search-form">
         <input
           type="search"
@@ -49,8 +30,8 @@ const onClickCurrentLocationButton = () => console.log("current location button 
         <MagnifyingGlassIcon class="location-search-form__search-img h-6 w-6"></MagnifyingGlassIcon>
       </div>
       <!-- /.location-search-form -->
-      <div class="delivery-dest-selector__selected-location-display"></div>
-      <!-- /.delivery-dest-selector__selected-location-display -->
+      <div class="pickup-location-selector__selected-location-display"></div>
+      <!-- /.pickup-location-selector__selected-location-display -->
       <div class="location-select-map">
         <div ref='mapDiv' class="location-select-map__map"></div>
         <!-- /.location-select-map__map -->
@@ -64,11 +45,11 @@ const onClickCurrentLocationButton = () => console.log("current location button 
       <!-- /.location-select-map -->
     </main>
   </div>
-  <!-- /.select-delivery-dest-page -->
+  <!-- /.select-pickup-location-page -->
 </template>
 
 <style scoped>
-.delivery-dest-selector {
+.pickup-location-selector {
   display: flex;
   flex-direction: column;
 }
@@ -76,7 +57,7 @@ const onClickCurrentLocationButton = () => console.log("current location button 
   display: flex;
   justify-content: center;
 }
-.delivery-dest-selector__selected-location-display {
+.pickup-location-selector__selected-location-display {
   border-radius: 0.5em;
   height: 2em;
 }

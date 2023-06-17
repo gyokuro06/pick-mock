@@ -1,11 +1,11 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import DeliveryListPageVue from "../pages/DeliveryListPage.vue";
-import DeliveryOrderPageVue from "../pages/DeliveryOrderPage.vue";
-import PickupLocationSelectorPageVue from "../pages/PickupLocationSelectorPage.vue";
-import DeliveryDestSelectorPageVue from "../pages/DeliveryDestSelectorPage.vue";
-import RegisterPickupLocationDetailPageVue from "../pages/RegisterPickupLocationDetailPage.vue";
-import RegisterDeliveryDestDetailPageVue from "../pages/RegisterDeliveryDestDetailPage.vue";
-import RefrigeratorCarTypePickPageVue from "../pages/RefrigeratorCarTypePickPage.vue";
+import DeliveryListPageVue from "../components/pages/DeliveryListPage.vue";
+import DeliveryOrderPageVue from "../components/pages/DeliveryOrderPage.vue";
+import PickupLocationSelectorPageVue from "../components/pages/PickupLocationSelectorPage.vue";
+import DeliveryDestSelectorPageVue from "../components/pages/DeliveryDestSelectorPage.vue";
+import RegisterPickupLocationDetailPageVue from "../components/pages/RegisterPickupLocationDetailPage.vue";
+import RegisterDeliveryDestDetailPageVue from "../components/pages/RegisterDeliveryDestDetailPage.vue";
+import RefrigeratorCarTypePickPageVue from "../components/pages/RefrigeratorCarTypePickPage.vue";
 
 const routes = [
     {

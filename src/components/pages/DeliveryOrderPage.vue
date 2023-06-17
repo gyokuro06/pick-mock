@@ -1,8 +1,8 @@
 <script setup lang='ts'>
 import { useRouter } from 'vue-router';
-import Header from '../components/molecules/Header.vue';
-import Button from '../components/atoms/Button.vue';
-import OrderStep from '../components/molecules/OrderStep.vue';
+import Header from '../molecules/Header.vue';
+import Button from '../atoms/Button.vue';
+import OrderStep from '../molecules/OrderStep.vue';
 
 const router = useRouter()
 const onGoback = () => router.push('/')

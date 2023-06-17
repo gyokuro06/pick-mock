@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import { useRouter } from 'vue-router';
-import Header from '../components/molecules/Header.vue';
-import CarType from '../components/molecules/CarType.vue';
+import Header from '../molecules/Header.vue';
+import CarType from '../molecules/CarType.vue';
 
 const router = useRouter()
 const onGoback = () => router.push('/order')

@@ -2,9 +2,9 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ListBulletIcon, UserIcon } from '@heroicons/vue/24/solid'
-import Header from '../components/molecules/Header.vue';
-import Button from '../components/atoms/Button.vue';
-import SvgIcon from '../components/atoms/SvgIcon.vue';
+import Header from '../molecules/Header.vue';
+import Button from '../atoms/Button.vue';
+import SvgIcon from '../atoms/SvgIcon.vue';
 
 const router = useRouter()
 const deliveryList = ref([])
