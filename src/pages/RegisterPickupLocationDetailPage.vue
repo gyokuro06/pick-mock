@@ -16,39 +16,50 @@ const onClickRegisterButton = () => router.push('/order')
         <div class="pickup-location__title">集荷先</div>
         <div class="pickup-location__address">東京都江戸川区北小岩２丁目１９−８</div>
       </div>
+      <!-- /.pickup-location -->
       <div class="building-and-room">
         <div class="building-and-room__title">建物名・部屋番号</div>
         <input type="text" class="building-and-room__address" placeholder="建物名・部屋番号などを入力...">
       </div>
+      <!-- /.building-and-room -->
       <div class="company-and-department">
         <div class="company-and-department__title">会社・部署名</div>
         <input type="text" class="company-and-department__address" placeholder="会社・部署名などを入力...">
       </div>
+      <!-- /.company-and-department -->
       <div class="contact-person-name">
         <div class="contact-person-name__title">
           <span class="contact-person-name__title--required border-red-500">必須</span>
           集荷先担当者のお名前 (ひらがな)
         </div>
+        <!-- /.contact-person-name__title -->
         <input type="text" class="contact-person-name__address" placeholder="さかもと　りょうま" required>
       </div>
+      <!-- /.contact-person-name -->
       <div class="tel">
         <div class="tel__title">
           <span class="tel__title--required border-red-500">必須</span>
           電話番号
         </div>
+        <!-- /.tel__title -->
         <input type="tel" class="tel__address" placeholder="09012345678 ハイフン(-)なし" required>
       </div>
+      <!-- /.tel -->
     </main>
     <footer class="register-pickup-location-detail-footer">
       <div class="register-pickup-location-detail-footer__register-button-wrapper">
         <Button @click="onClickRegisterButton">登録する</Button>
       </div>
+      <!-- /.register-pickup-location-detail-footer__register-button-wrapper -->
     </footer>
   </div>
   <!-- /.register-pickup-location-detail-page -->
 </template>
 
 <style scoped>
+.pickup-location-detail-input-form {
+  margin: 0 3rem;
+}
 .pickup-location {
   text-align: left;
   line-height: 3em;
