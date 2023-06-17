@@ -1,29 +1,42 @@
 <script setup lang='ts'>
-import { Ref, onMounted, ref } from 'vue';
+import { Ref, computed, onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { getMap } from '../../driver/googleMapsApi';
+import { getAddressByQuery } from '../../gateway/addressGateway';
 import Header from '../molecules/Header.vue';
 import Button from '../atoms/Button.vue';
+import { Address } from '../../domain/address';
 
 const router = useRouter()
 const onGoback = () => router.push('/order')
 const onClickDetailLocationStepButton = () => router.push('/order/dest/detail')
 
-const googleMapOptions = {
-  center: {
-    lat: 35.6682156,
-    lng: 139.6584685,
-  },
-  zoom: 10
-}
-
 const mapDiv: Ref<HTMLElement | undefined> = ref()
 onMounted(() => {
-  getMap(mapDiv.value!, googleMapOptions)
+  getMap(mapDiv.value!)
 })
 
 const onClickCurrentLocationButton = () => console.log("current location button clicked.")
+const locationSearchForm: Ref<HTMLInputElement | undefined> = ref()
+const addresses: Address[] = reactive([])
+const stringAddress = computed(() => {
+  if (addresses.length === 0) return ''
+  const zipcode = addresses[0].zipCode?.zipcode ?? ''
+  const prefecture = addresses[0].prefecture ?? ''
+  const city = addresses[0].city ?? ''
+  const streetAddress = addresses[0].streetAddress ?? ''
+  return zipcode + ' ' + prefecture + city + streetAddress
+})
+const onKeydownEnterSearchForm = async (e: KeyboardEvent) => {
+  if(e.isComposing) return
+  searchAddress()
+}
+const onClickSearchIcon = async () => searchAddress()
+const searchAddress = async () => {
+  addresses.pop()
+  addresses.unshift((await getAddressByQuery(locationSearchForm.value!.value))[0])
+}
 </script>
 
 <template>
@@ -34,11 +47,18 @@ const onClickCurrentLocationButton = () => console.log("current location button 
         <input
           type="search"
           class="location-search-form__input focus:ring-blue-500 focus:border-blue-500"
-          placeholder="住所を検索する">
-        <MagnifyingGlassIcon class="location-search-form__search-img h-6 w-6"></MagnifyingGlassIcon>
+          placeholder="住所を検索する"
+          ref="locationSearchForm"
+          @keydown.enter="onKeydownEnterSearchForm">
+        <MagnifyingGlassIcon
+          class="location-search-form__search-img h-6 w-6"
+          @click="onClickSearchIcon">
+        </MagnifyingGlassIcon>
       </div>
       <!-- /.location-search-form -->
-      <div class="delivery-dest-selector__selected-location-display"></div>
+      <div class="delivery-dest-selector__selected-location-display">
+        {{ stringAddress }}
+      </div>
       <!-- /.delivery-dest-selector__selected-location-display -->
       <div class="location-select-map">
         <div ref='mapDiv' class="location-select-map__map"></div>

@@ -41,11 +41,6 @@ const convertGeocodeToAddress = (geocode: Geocode): Address => {
     const prefecture = extractPrefecture(geocode)
     const city = extractCity(geocode)
     const streetAddress = extractStreetAddress(geocode)
-    console.log('gateway country: ' + country)
-    console.log('gateway zipcode: ' + zipCode)
-    console.log('gateway pref: ' + prefecture)
-    console.log('gateway city: ' + city)
-    console.log('gateway street: ' + streetAddress)
     return {
         country,
         zipCode,

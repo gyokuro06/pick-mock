@@ -21,16 +21,11 @@ const onClickCurrentLocationButton = () => console.log("current location button 
 const locationSearchForm: Ref<HTMLInputElement | undefined> = ref()
 const addresses: Address[] = reactive([])
 const stringAddress = computed(() => {
-  console.log('stringAddress computed.')
   if (addresses.length === 0) return ''
   const zipcode = addresses[0].zipCode?.zipcode ?? ''
-  console.log('page zipcode: ' + zipcode)
   const prefecture = addresses[0].prefecture ?? ''
-  console.log('page pref: ' + prefecture)
   const city = addresses[0].city ?? ''
-  console.log('page city: ' + city)
   const streetAddress = addresses[0].streetAddress ?? ''
-  console.log('page streetAddress: ' + streetAddress)
   return zipcode + ' ' + prefecture + city + streetAddress
 })
 const onKeydownEnterSearchForm = async (e: KeyboardEvent) => {
