@@ -41,8 +41,8 @@ const labelClass = computed(() => ({
   align-items: center;
 }
 .icon__img {
-  height: var(--h-6);
-  width: var(--w-6);
+  height: var(--h-1);
+  width: var(--w-1);
 }
 .icon__img :slotted(svg) {
   fill: var(--white);

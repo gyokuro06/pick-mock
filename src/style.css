@@ -30,21 +30,20 @@
 }
 
 #app {
-  width: 50%;
-  margin: 4em auto 0;
+  width: 100%;
+  margin: 4rem auto 0;
   text-align: center;
 }
 
 #app header {
-  height: 4em;
+  height: 4rem;
   position: relative;
   margin: 0;
 }
 
 #app main {
-  height: 40em;
+  height: 40rem;
   position: relative;
-  margin: 0;
 }
 
 #app footer {

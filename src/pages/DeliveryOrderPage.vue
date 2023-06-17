@@ -51,7 +51,7 @@ const onClickOrderButton = () => router.push('/')
 .refrigerator-car-type-step-wrapper,
 .pickup-location-step-wrapper,
 .delivery-dest-step-wrapper {
-  margin: 1em;
+  margin: 1.5rem 5rem;
 }
 .delivery-order-footer {
   border-top: 1px solid gray;
