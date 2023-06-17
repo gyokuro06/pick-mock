@@ -22,6 +22,30 @@ const onGoback = () => router.push('/order')
         ></CarType>
     </div>
     <!-- /.refrigerator-car-type-pick__light-car-wrapper -->
+    <div class="refrigerator-car-type-pick__light-car-wrapper">
+      <CarType
+        :name="'軽車両'"
+        :speed="'最速'"
+        :loadCapacity="'130×180×120cm'"
+        :maxCapacity="'350kg'"
+        :account="8190"
+        :perDistance="22.0"
+        :perMinTime="51"
+        ></CarType>
+    </div>
+    <!-- /.refrigerator-car-type-pick__light-car-wrapper -->
+    <div class="refrigerator-car-type-pick__light-car-wrapper">
+      <CarType
+        :name="'軽車両'"
+        :speed="'最速'"
+        :loadCapacity="'130×180×120cm'"
+        :maxCapacity="'350kg'"
+        :account="8190"
+        :perDistance="22.0"
+        :perMinTime="51"
+        ></CarType>
+    </div>
+    <!-- /.refrigerator-car-type-pick__light-car-wrapper -->
   </main>
 </template>
 
