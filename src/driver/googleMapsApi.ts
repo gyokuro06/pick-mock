@@ -35,19 +35,37 @@ export const getGeocodes = async (query: string): Promise<GeocodesResponse | und
   }
   return json.results.map((r: any) => ({
     address_components:  r.address_components,
-    geometry: r.geometry.location
+    geometry: r.geometry
   }))
 }
 
-export const getMap = (
+export const initLoadMap = (
   element: HTMLElement,
-  options: google.maps.MapOptions = defaultGoogleMapOptions) => {
+  options: google.maps.MapOptions = defaultGoogleMapOptions
+) => {
   googleMapLoader
     .importLibrary('maps')
     .then(({ Map }) => {
       new Map(element, options)
     })
     .catch((e) => console.error(e))
+}
+
+export const getMap = (
+  element: HTMLElement,
+  options: google.maps.MapOptions = defaultGoogleMapOptions
+) => {
+  return new google.maps.Map(element, options)
+}
+
+export const setMarker = (
+  position: google.maps.LatLng|google.maps.LatLngLiteral,
+  map: google.maps.Map
+) => {
+  new google.maps.Marker({
+    position,
+    map,
+  })
 }
 
 export type AddressComponent = {

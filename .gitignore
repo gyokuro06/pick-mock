@@ -146,3 +146,6 @@ yarn-error.log
 
 ## tailwind
 build.css
+
+## rest client
+*.http

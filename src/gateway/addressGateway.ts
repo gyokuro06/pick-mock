@@ -1,10 +1,18 @@
 import { Address, Country, ZipCode } from '../domain/address';
-import { Geocode, getGeocodes } from "../driver/googleMapsApi";
+import { Geocode, getGeocodes, getMap, setMarker } from "../driver/googleMapsApi";
 
 export const getAddressByQuery = async (query: string) => {
     const geocodes = await getGeocodes(query)
     if (!geocodes) return []
     return geocodes.map(gc => convertGeocodeToAddress(gc))
+}
+
+export const getMapWithMarker = async (element: HTMLElement ,options: google.maps.MapOptions) => {
+    console.log('getmapWithMarker start.')
+    console.log('target element: ' + element.id)
+    const map = await getMap(element, options)
+    console.log('map: ' + map.getCenter() + ' ' + map.getZoom())
+    await setMarker(options.center!, map)
 }
 
 const addressComponentsFilter = (gc: Geocode, type: string) =>
@@ -16,7 +24,7 @@ const extractCountry = (gc: Geocode): Country => {
         default: return undefined
     }
 }
-const extractZipCode = (gc: Geocode) => {
+const extractZipcode = (gc: Geocode) => {
     const zipCode = addressComponentsFilter(gc, 'postal_code')[0]?.short_name ?? ''
     return ZipCode.of(zipCode)
 }
@@ -37,15 +45,10 @@ const extractStreetAddress = (gc: Geocode) => {
 }
 const convertGeocodeToAddress = (geocode: Geocode): Address => {
     const country = extractCountry(geocode)
-    const zipCode = extractZipCode(geocode)
+    const zipcode = extractZipcode(geocode)
     const prefecture = extractPrefecture(geocode)
     const city = extractCity(geocode)
     const streetAddress = extractStreetAddress(geocode)
-    return {
-        country,
-        zipCode,
-        prefecture,
-        city,
-        streetAddress
-    }
+    const geometry = geocode.geometry.location
+    return new Address(country, prefecture, city, geometry, zipcode, streetAddress)
 }
