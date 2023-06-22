@@ -6,6 +6,7 @@ import DeliveryDestSelectorPageVue from "../components/pages/DeliveryDestSelecto
 import RegisterPickupLocationDetailPageVue from "../components/pages/RegisterPickupLocationDetailPage.vue";
 import RegisterDeliveryDestDetailPageVue from "../components/pages/RegisterDeliveryDestDetailPage.vue";
 import RefrigeratorCarTypePickPageVue from "../components/pages/RefrigeratorCarTypePickPage.vue";
+import SchedulePickPageVue from "../components/pages/SchedulePickPage.vue"
 
 const routes = [
     {
@@ -42,6 +43,11 @@ const routes = [
         path: "/order/dest/detail",
         name: "RegisterDeliveryDestDetail",
         component: RegisterDeliveryDestDetailPageVue,
+    },
+    {
+        path: "/order/schedule",
+        name: "ScheduleDatePick",
+        component: SchedulePickPageVue,
     }
 ];
 
