@@ -1,10 +1,12 @@
 <script setup lang='ts'>
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import Header from '../molecules/Header.vue';
 import Button from '../atoms/Button.vue';
 import DatePicker from '../molecules/DatePicker.vue';
-import { ref } from 'vue';
-import { toFormattedDateTimeString } from '../../utils/date';
+import Header from '../molecules/Header.vue';
+import InputWithLabel from '../molecules/InputWithLabel.vue';
+import TextInput from '../atoms/TextInput.vue';
+import TextArea from '../atoms/TextArea.vue';
 
 const pickupDate = ref(new Date())
 const deliveryDate = ref(new Date())
@@ -13,45 +15,39 @@ const message = ref('')
 
 const router = useRouter();
 const onGoback = () => router.push('/order')
-const onClickDecideButton = () => router.push('')
+const onClickDecideButton = () => router.push('/')
 </script>
 
 <template>
   <div class="schedule-pick-page">
     <Header :show-goback="true" @goback="onGoback">集荷日時を選択する</Header>
     <main class="schedule-pick">
-      <div class="pickup-datetime-selector-wrapper">
-        <div class="pickup-datetime-selector-wrapper__label">
-          集荷希望日時
-        </div>
-        <!-- /.pickup-datetime-selector-wrapper__label -->
-        <DatePicker v-model="pickupDate"></DatePicker>
-        {{ toFormattedDateTimeString(pickupDate) }}
+      <div class="pickup-datetime-selector">
+        <InputWithLabel :label="'集荷希望日時'" :required="true">
+          <DatePicker class="pickup-datetime-selector__datepicker" v-model="pickupDate"></DatePicker>
+        </InputWithLabel>
       </div>
-      <!-- /.pickup-datetime-selector-wrapper -->
-      <div class="desire-delivery-datetime-selector-wrapper">
-        <div class="desire-delivery-datetime-selector-wrapper__label">
-          配送希望日時
-        </div>
-        <!-- /.desire-delivery-datetime-selector-wrapper__label -->
-        <DatePicker v-model="deliveryDate"></DatePicker>
-        {{  toFormattedDateTimeString(deliveryDate) }}
+      <!-- /.pickup-datetime-selector -->
+      <div class="delivery-datetime-selector">
+        <InputWithLabel :label="'配送希望日時'" :required="true">
+          <DatePicker class="delivery-datetime-selector__datepicker" v-model="deliveryDate"></DatePicker>
+        </InputWithLabel>
       </div>
-      <!-- /.desire-delivery-datetime-selector-wrapper -->
+      <!-- /.delivery-datetime-selector -->
       <div class="delivery-contents">
-        <div class="delivery-contents__label">
-          配送物
-        </div>
-        <!-- /.delivery-contents__label -->
-        <input type="text" class="delivery-contents__input" v-model="deliveryContents" placeholder="例：ダンボール5個、１人用ソファー１台">
+        <InputWithLabel :label="'配送物'" :required="true">
+          <TextInput v-model="deliveryContents" :placeholder="'例：ダンボール5個、１人用ソファー１台'"></TextInput>
+        </InputWithLabel>
       </div>
       <!-- /.delivery-contents -->
       <div class="message">
-        <div class="message__label">
-          配送ドライバーへの伝達事項
-        </div>
-        <!-- /.message__label -->
-        <textarea class="message_input" v-model="message" cols="30" rows="10" placeholder="例：ダンボールは180サイズ（幅62×奥行62×高さ50cm）、1人用ソファは80×80×90cm程度です。エレベーターはありません。"></textarea>
+        <InputWithLabel :label="'配送ドライバーへの伝達事項'">
+          <TextArea
+            class="message_input"
+            v-model="message"
+            :placeholder="'例：ダンボールは180サイズ（幅62×奥行62×高さ50cm）、1人用ソファは80×80×90cm程度です。エレベーターはありません。'">
+          </TextArea>
+        </InputWithLabel>
       </div>
       <!-- /.message -->
     </main>
@@ -68,7 +64,20 @@ const onClickDecideButton = () => router.push('')
 </template>
 
 <style scoped>
+.schedule-pick {
+  margin: 0 3rem;
+}
+.pickup-datetime-selector,
+.delivery-datetime-selector,
+.delivery-contents,
+.message {
+  margin: 0 0 1rem 0;
+}
+.delivery-contents__input {
+  border-radius: 3px;
+}
 .shedule-pick-footer__decide-button-wrapper {
   width: 90%;
+  margin: 0 3rem;
 }
 </style>

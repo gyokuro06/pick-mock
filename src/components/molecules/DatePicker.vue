@@ -85,8 +85,6 @@ const minuteCandidates = () => {
 <style scoped>
 .date-picker {
   display: flex;
-  justify-content: center;
-  margin: 0.5rem 0;
 }
 .date-picker__date-pulldown-wrapper,
 .date-picker__hour-pulldown-wrapper,

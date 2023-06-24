@@ -9,7 +9,7 @@ const onGoback = () => router.push('/')
 const onClickRefrigeratorCarTypeButton = () => router.push('/order/car')
 const onClickPickupLocationButton = () => router.push('/order/pickup')
 const onClickDeliveryDestButton = () => router.push('/order/dest')
-const onClickOrderButton = () => router.push('/')
+const onClickOrderButton = () => router.push('/order/schedule')
 </script>
 
 <template>

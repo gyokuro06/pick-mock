@@ -29,5 +29,6 @@ watch(selected, () => emits('update:modelValue', selected.value))
 .pulldown__select {
   padding: 0.2rem 1rem;
   border-radius: 8px;
+  height: 3rem;
 }
 </style>
