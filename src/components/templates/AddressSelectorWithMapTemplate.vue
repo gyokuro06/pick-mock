@@ -1,12 +1,12 @@
 <script setup lang='ts'>
-import { Ref, computed, onMounted, reactive, ref } from 'vue';
-import { useRouter } from 'vue-router';
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
+import { Ref, computed, onMounted, reactive, ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 import { Address } from '../../domain/address';
-import { initLoadMap } from '../../driver/googleMapsApi';
-import { getAddressByQuery, getMapWithMarker } from '../../gateway/addressGateway';
-import Header from '../molecules/Header.vue';
+import { GoogleMapState } from '../../domain/googleMap';
+import { getAddressByPosition, getAddressByQuery, getMapWithMarker, initMap } from '../../gateway/addressGateway';
 import Button from '../atoms/Button.vue';
+import Header from '../molecules/Header.vue';
 
 const props = defineProps({
   next: {
@@ -23,8 +23,11 @@ const router = useRouter()
 const onGoback = () => router.push('/order')
 const onClickNextStepButton = () => router.push(props.next)
 
-onMounted(() => {
-  initLoadMap(document.getElementById('map')!)
+const mapDiv = ref(document.getElementById('map')!)
+const googleMap = ref<GoogleMapState>()
+
+onMounted(async () => {
+  googleMap.value = await initMap(mapDiv.value, googleMap.value)
 })
 
 const onClickCurrentLocationButton = () => console.log("current location button clicked.")
@@ -32,7 +35,7 @@ const locationSearchForm: Ref<HTMLInputElement | undefined> = ref()
 const addresses: Address[] = reactive([])
 const stringAddress = computed(() => {
   if (addresses.length === 0) return ''
-  getMapWithMarker(document.getElementById('map')!, {
+  getMapWithMarker(googleMap.value!, {
     center: addresses[0].geometry,
     zoom: 16
   })
@@ -42,11 +45,27 @@ const onKeydownEnterSearchForm = async (e: KeyboardEvent) => {
   if(e.isComposing) return
   searchAddress()
 }
+const onClickMap = async () => {
+  addresses.length = 0
+  const results = await getAddressByPosition(googleMap.value?.markers[0].getPosition()!)
+  results.forEach(r => addresses.push(r))
+}
 const onClickSearchIcon = async () => searchAddress()
 const searchAddress = async () => {
-  addresses.pop()
-  addresses.unshift((await getAddressByQuery(locationSearchForm.value!.value))[0])
+  addresses.length = 0
+  const results = await getAddressByQuery(locationSearchForm.value!.value)
+  results.forEach(r => addresses.push(r))
 }
+// watch(googleMap, async () => {
+//   if (googleMap.value?.markers.length === 0) return
+//   addresses.length = 0
+//   const results = await getAddressByPosition(googleMap.value?.markers[0].getPosition()!)
+//   results.forEach(r => addresses.push(r))
+// })
+// watch(addresses, () => {
+//   if (addresses.length === 0) return
+//   addresses.forEach((a, i) => console.log('addresses' + i + ': ' + a.toString()))
+// })
 </script>
 
 <template>
@@ -71,7 +90,7 @@ const searchAddress = async () => {
       </div>
       <!-- /.address-selector__selected-location-display -->
       <div class="location-select-map">
-        <div id="map" ref='mapDiv' class="location-select-map__map"></div>
+        <div id="map" ref='mapDiv' class="location-select-map__map" @click="onClickMap"></div>
         <!-- /.location-select-map__map -->
         <div class="current-location-button-wrapper">
           <Button @click="onClickCurrentLocationButton">現在地</Button>
