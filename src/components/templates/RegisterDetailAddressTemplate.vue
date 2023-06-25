@@ -3,6 +3,8 @@ import { useRouter } from 'vue-router';
 import Header from '../molecules/Header.vue';
 import Button from '../atoms/Button.vue';
 import InputWithLabel from '../molecules/InputWithLabel.vue';
+import TextInput from '../atoms/TextInput.vue';
+import { ref } from 'vue';
 
 const props = defineProps<{
   headerTitle: string,
@@ -11,6 +13,9 @@ const props = defineProps<{
   gobackTo: string
 }>()
 
+const buildingAndRoomAddress = ref()
+const companyAndDepartmentAddress = ref()
+const contactPerson = ref()
 const router = useRouter()
 const onGoback = () => router.push(props.gobackTo)
 const onClickRegisterButton = () => router.push('/order')
@@ -28,25 +33,37 @@ const onClickRegisterButton = () => router.push('/order')
       <!-- /.destination -->
       <div class="building-and-room">
         <InputWithLabel :label="'建物名・部屋番号'">
-          <input type="text" class="building-and-room__address" placeholder="建物名・部屋番号などを入力...">
+          <TextInput
+            class="building-and-room__input"
+            v-model="buildingAndRoomAddress"
+            :placeholder="'建物名・部屋番号などを入力...'">
+          </TextInput>
         </InputWithLabel>
       </div>
       <!-- /.building-and-room -->
       <div class="company-and-department">
         <InputWithLabel :label="'会社・部署名'">
-          <input type="text" class="company-and-department__address" placeholder="会社・部署名などを入力...">
+          <TextInput
+            class="company-and-department__input"
+            v-model="companyAndDepartmentAddress"
+            :placeholder="'会社・部署名などを入力...'">
+          </TextInput>
         </InputWithLabel>
       </div>
       <!-- /.company-and-department -->
       <div class="contact-person-name">
         <InputWithLabel :label="contactPersonLabel" :required="true">
-          <input type="text" class="contact-person-name__address" placeholder="さかもと　りょうま" required>
+          <TextInput
+            class="contact-person-name__input"
+            v-model="contactPerson"
+            :placeholder="'さかもと　りょうま'">
+          </TextInput>
         </InputWithLabel>
       </div>
       <!-- /.contact-person-name -->
       <div class="tel">
         <InputWithLabel :label="'電話番号'" :required="true">
-          <input type="tel" class="tel__address" placeholder="09012345678 ハイフン(-)なし" required>
+          <input type="tel" class="tel__input" placeholder="09012345678 ハイフン(-)なし" required>
         </InputWithLabel>
       </div>
       <!-- /.tel -->
@@ -72,10 +89,10 @@ const onClickRegisterButton = () => router.push('/order')
 .tel {
   margin: 0 0 1em;
 }
-.building-and-room__address,
-.company-and-department__address,
-.contact-person-name__address,
-.tel__address {
+.building-and-room__input,
+.company-and-department__input,
+.contact-person-name__input,
+.tel__input {
   width: 100%;
   height: 3em;
   padding: 0 0 0 0.5em;
@@ -89,5 +106,11 @@ const onClickRegisterButton = () => router.push('/order')
 }
 .register-detail-address-footer__register-button-wrapper {
   width: 90%;
+}
+@media (prefers-color-scheme: light) {
+  .tel__input {
+    background-color: #e9e9ed;
+    color: var(--black);
+  }
 }
 </style>

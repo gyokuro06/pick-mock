@@ -24,4 +24,10 @@ watch(inputValue, () => {
   padding: 0 0 0 0.5rem;
   border-radius: 8px;
 }
+@media (prefers-color-scheme: light) {
+  .text-input__input {
+    background-color: #e9e9ed;
+    color: var(--black);
+  }
+}
 </style>

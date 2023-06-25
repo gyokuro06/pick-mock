@@ -59,4 +59,15 @@ const labelClass = computed(() => ({
   font-weight: bold;
   color: var(--blue-500);
 }
+@media (prefers-color-scheme: light) {
+  .icon__img :slotted(svg) {
+    fill: var(--black);
+  }
+  .icon__img--active :slotted(svg) {
+    fill: var(--blue-500);
+  }
+  .icon__label {
+    color: var(--black);
+  }
+}
 </style>

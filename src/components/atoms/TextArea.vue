@@ -34,6 +34,11 @@ watch(textAreaValue, () => {
   border-radius: 8px;
   line-height: 1.2rem;
   padding: 0.5rem;
-
+}
+@media (prefers-color-scheme: light) {
+  .text-area__textarea {
+    color: var(--black);
+    background-color: #e9e9ed;
+  }
 }
 </style>

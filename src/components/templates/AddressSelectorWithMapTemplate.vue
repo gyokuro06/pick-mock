@@ -63,16 +63,6 @@ const searchAddress = async () => {
   const results = await getAddressByQuery(locationSearchForm.value!.value)
   results.forEach(r => addresses.push(r))
 }
-// watch(googleMap, async () => {
-//   if (googleMap.value?.markers.length === 0) return
-//   addresses.length = 0
-//   const results = await getAddressByPosition(googleMap.value?.markers[0].getPosition()!)
-//   results.forEach(r => addresses.push(r))
-// })
-// watch(addresses, () => {
-//   if (addresses.length === 0) return
-//   addresses.forEach((a, i) => console.log('addresses' + i + ': ' + a.toString()))
-// })
 </script>
 
 <template>
@@ -163,5 +153,10 @@ const searchAddress = async () => {
   bottom: 1em;
   left: 15%;
   width: 70%;
+}
+@media (prefers-color-scheme: light) {
+  .location-search-form__input {
+    background-color: #e9e9ed;
+  }
 }
 </style>

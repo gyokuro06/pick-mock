@@ -31,4 +31,9 @@ watch(selected, () => emits('update:modelValue', selected.value))
   border-radius: 8px;
   height: 3rem;
 }
+@media (prefers-color-scheme: light) {
+  .pulldown__select {
+    color: var(--black);
+  }
+}
 </style>
