@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
-import { Ref, computed, onMounted, reactive, ref, watch } from 'vue';
+import { Ref, computed, onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { Address } from '../../domain/address';
 import { GoogleMapState } from '../../domain/googleMap';

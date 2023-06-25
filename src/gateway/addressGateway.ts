@@ -1,6 +1,6 @@
 import { Address, Country, ZipCode } from '../domain/address';
 import { GoogleMapState } from '../domain/googleMap';
-import { Geocode, getGeocodesByLatLng, getGeocodesByQuery, getMap, loadMap, setMarker } from "../driver/googleMapsApi";
+import { getGeocodesByLatLng, getGeocodesByQuery, loadMap, setMarker } from "../driver/googleMapsApi";
 
 export const initMap = async (element: HTMLElement, mapState?: GoogleMapState) => {
     if (mapState) return;
