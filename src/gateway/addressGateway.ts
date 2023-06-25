@@ -2,18 +2,25 @@ import { Address, Country, ZipCode } from '../domain/address';
 import { GoogleMapState } from '../domain/googleMap';
 import { getGeocodesByLatLng, getGeocodesByQuery, loadMap, setMarker } from "../driver/googleMapsApi";
 
-export const initMap = async (element: HTMLElement, mapState?: GoogleMapState) => {
-    if (mapState) return;
-    mapState = {
+export const loadDefaultMap = async (element: HTMLElement): Promise<GoogleMapState> => {
+    return {
         map: await loadMap(element),
-        markers: []
+        marker: null
     }
-    mapState.map.addListener('click', (e: google.maps.MapMouseEvent) => {
-        addMarker(mapState!, e.latLng!)
-        panToAndZoomMap(mapState!, e.latLng!, 14)
-    })
-    return mapState
 }
+// export const initMap = async (element: HTMLElement, mapState?: GoogleMapState) => {
+//     if (mapState) return;
+//     mapState = {
+//         map: await loadMap(element),
+//         markers: []
+//     }
+//     mapState.map.addListener('click', (e: google.maps.MapMouseEvent) => {
+//         console.log('map clicked. markers.length: ' + mapState?.markers.length + ', markers:' +  mapState?.markers.map(m => m.getPosition()))
+//         addMarker(mapState!, e.latLng!)
+//         panToAndZoomMap(mapState!, e.latLng!, 14)
+//     })
+//     return mapState
+// }
 
 export const getAddressByQuery = async (query: string) => {
     const geocodes = await getGeocodesByQuery(query)
@@ -30,20 +37,15 @@ export const getMapWithMarker = (mapState: GoogleMapState, options?: google.maps
     addMarker(mapState, options?.center ?? undefined)
     return mapState
 }
+const addMarker = (ms: GoogleMapState, latlng?: google.maps.LatLng|google.maps.LatLngLiteral) => {
+    console.log(`${ms} + ${latlng}`)
+}
 
-const panToAndZoomMap = (mapState: GoogleMapState, latLng: google.maps.LatLng, zoomLevel: number) => {
-    mapState.map.panTo(latLng)
-    mapState.map.setZoom(zoomLevel)
-}
-const hideAllMarker = (mapState: GoogleMapState) => {
-    mapState.markers.forEach(m => m.setMap(null))
-}
-const addMarker = (mapState: GoogleMapState, latLng?: google.maps.LatLng|google.maps.LatLngLiteral) => {
-    if (mapState.markers.length > 0) {
-        hideAllMarker(mapState)
-        mapState.markers.pop()
-    }
-    mapState.markers.push(setMarker(mapState.map, latLng))
+export const getMarker = (
+    mapState: GoogleMapState,
+    latLng?: google.maps.LatLng|google.maps.LatLngLiteral
+): google.maps.Marker => {
+    return setMarker(mapState.map, latLng)
 }
 const addressComponentsFilter = (gc: google.maps.GeocoderResult, type: string) =>
     gc.address_components.filter(ac => ac.types.includes(type))

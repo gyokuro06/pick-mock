@@ -4,7 +4,8 @@ import { Ref, computed, onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { Address } from '../../domain/address';
 import { GoogleMapState } from '../../domain/googleMap';
-import { getAddressByPosition, getAddressByQuery, getMapWithMarker, initMap } from '../../gateway/addressGateway';
+import { getAddressByPosition, getAddressByQuery, getMapWithMarker, getMarker } from '../../gateway/addressGateway';
+import { initMap } from '../../usecase/initMapUsecase';
 import Button from '../atoms/Button.vue';
 import Header from '../molecules/Header.vue';
 
@@ -28,6 +29,17 @@ const googleMap = ref<GoogleMapState>()
 
 onMounted(async () => {
   googleMap.value = await initMap(mapDiv.value, googleMap.value)
+  googleMap.value.map.addListener('click', async (e: google.maps.MapMouseEvent) => {
+    console.log('map clicked.: ' + e.latLng?.toString())
+    if (!e.latLng || !googleMap.value) return
+    googleMap.value.map.panTo(e.latLng)
+    googleMap.value.map.setZoom(14)
+    googleMap.value.marker?.setMap(null)
+    googleMap.value.marker = getMarker(googleMap.value, e.latLng)
+    addresses.length = 0
+    const results = await getAddressByPosition(e.latLng)
+    results.forEach(r => addresses.push(r))
+  })
 })
 
 const onClickCurrentLocationButton = () => console.log("current location button clicked.")
@@ -44,11 +56,6 @@ const stringAddress = computed(() => {
 const onKeydownEnterSearchForm = async (e: KeyboardEvent) => {
   if(e.isComposing) return
   searchAddress()
-}
-const onClickMap = async () => {
-  addresses.length = 0
-  const results = await getAddressByPosition(googleMap.value?.markers[0].getPosition()!)
-  results.forEach(r => addresses.push(r))
 }
 const onClickSearchIcon = async () => searchAddress()
 const searchAddress = async () => {
@@ -90,7 +97,7 @@ const searchAddress = async () => {
       </div>
       <!-- /.address-selector__selected-location-display -->
       <div class="location-select-map">
-        <div id="map" ref='mapDiv' class="location-select-map__map" @click="onClickMap"></div>
+        <div id="map" ref='mapDiv' class="location-select-map__map"></div>
         <!-- /.location-select-map__map -->
         <div class="current-location-button-wrapper">
           <Button @click="onClickCurrentLocationButton">現在地</Button>
